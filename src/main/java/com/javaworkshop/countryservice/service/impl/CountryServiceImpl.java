@@ -1,10 +1,12 @@
 package com.javaworkshop.countryservice.service.impl;
 
-import com.javaworkshop.countryservice.domain.Country;
+
 import com.javaworkshop.countryservice.domain.CountryLanguage;
+import com.javaworkshop.countryservice.exception.ResourceNotFoundException;
 import com.javaworkshop.countryservice.repository.CountryRepository;
 import com.javaworkshop.countryservice.service.CountryService;
 import com.javaworkshop.countryservice.service.dto.CountryDTO;
+
 import org.springframework.stereotype.Service;
 
 import java.util.function.Function;
@@ -30,6 +32,6 @@ public class CountryServiceImpl implements CountryService {
                                                                      )
             )
 
-        ).orElseThrow(()-> new RuntimeException());
+        ).orElseThrow(()-> new ResourceNotFoundException());
     }
 }
