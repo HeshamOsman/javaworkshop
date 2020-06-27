@@ -1,10 +1,5 @@
 package com.javaworkshop.countryservice.config;
 
-
-
-import java.util.HashMap;
-import java.util.Map;
-
 import org.hibernate.exception.JDBCConnectionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import com.javaworkshop.countryservice.constants.ErrorMessages;
 import com.javaworkshop.countryservice.exception.ApiServiceException;
 
 
@@ -33,7 +29,7 @@ public class ExceptionControllerAdvice extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(JDBCConnectionException.class)
     public ResponseEntity<Object> dbError(Exception ex,
             WebRequest request){
-        return new ResponseEntity<Object>("INTERNAL_ERROR", HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<Object>(ErrorMessages.INTERNAL_ERROR, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 	private ResponseEntity<String> handleApiServiceExceptionAsResponse(ApiServiceException ex) {
