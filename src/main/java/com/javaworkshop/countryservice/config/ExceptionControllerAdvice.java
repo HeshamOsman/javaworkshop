@@ -19,8 +19,8 @@ public class ExceptionControllerAdvice extends ResponseEntityExceptionHandler {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ExceptionControllerAdvice.class);
 
-	@ExceptionHandler({ApiServiceException.class})
-	public final ResponseEntity<String> handleException(Exception ex) {
+	@ExceptionHandler(ApiServiceException.class)
+	public final ResponseEntity<String> handleExceptionDefinedInternally(Exception ex,WebRequest request) {
 			LOGGER.error("Handling Exception: ", ex);
 			return handleApiServiceExceptionAsResponse((ApiServiceException) ex);
 		
@@ -33,7 +33,7 @@ public class ExceptionControllerAdvice extends ResponseEntityExceptionHandler {
     }
 
 	private ResponseEntity<String> handleApiServiceExceptionAsResponse(ApiServiceException ex) {
-		return new ResponseEntity<>(ex.getMessage(), ex.getErrorHttpStatus());
+		return new ResponseEntity<String>(ex.getMessage(), ex.getErrorHttpStatus());
 	}
 
 }
