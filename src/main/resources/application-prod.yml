@@ -1,0 +1,5 @@
+spring:
+    jpa:
+      show-sql: false
+    datasource:
+      url: jdbc:postgresql://${hostip}:${dpport}/world-db

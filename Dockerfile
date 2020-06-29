@@ -1,16 +1,20 @@
-From ubuntu:bionic
-MAINTAINER HeshamOsman
+FROM maven:3.6.3-openjdk-11
+LABEL maintainer="hesham.osman28@gmail.com"
 
-RUN apt-get update && apt-get -y upgrade
+ADD . ~/countryservice
 
-RUN apt-get install -y openjdk-11-jdk
+ENV hostip=
+
+EXPOSE 8080
 
 WORKDIR ~/countryservice
 
-ARG appver=0.0.1-SNAPSHOT
-ENV appver=${appver}
-EXPOSE 8080
-COPY ./target/countryservice-${appver}.jar .
+RUN mvn package -Pprod -DskipTests
 
-CMD exec java -jar countryservice-${appver}.jar
+WORKDIR ./target
+
+ENV activeProf=prod
+ENV dpport=
+
+CMD exec java -DactiveProf=${activeProf} -Ddpport=${dpport}  -Dhostip=${hostip} -jar countryservice-0.0.1-SNAPSHOT.jar
 

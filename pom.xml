@@ -53,7 +53,7 @@
 			<version>${io-rest-assured.version}</version>
 			<scope>test</scope>
 		</dependency>
-          
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -66,14 +66,30 @@
 			</exclusions>
 		</dependency>
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
+	<profiles>
+		<profile>
+			<id>prod</id>
+			 <properties>
+                <activatedProperties>dev</activatedProperties>
+            </properties>
+		</profile>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			 <properties>
+                <activatedProperties>dev</activatedProperties>
+            </properties>
+		</profile>
+	</profiles>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-maven-plugin</artifactId>
+					</plugin>
+				</plugins>
+			</build>
 
 </project>
